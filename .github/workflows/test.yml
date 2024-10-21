@@ -3,9 +3,13 @@ name: Test Workflow
 on: push
 
 jobs:
-    first_job:
+    buil_and_test:
         runs-on: ubuntu-latest
         steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.1
+              # with: ${{}}
+            
             - name: Welcome message
               run: echo "Hello World"
 
