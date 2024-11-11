@@ -44,6 +44,9 @@ jobs:
     needs: [test_job]
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v4.2.1
+
     - name: Read file
       run: cat README.md
 
