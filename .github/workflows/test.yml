@@ -3,17 +3,35 @@ name: Test Workflow
 on: push
 
 jobs:
-    buil_and_test:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4.2.1
-              # with: ${{}}
+  build_job:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v4.2.1
+          # with: ${{}}
 
-            - name: List files
-              run: ls 
+        - name: List files
+          run: ls 
 
-            - name: Executing Shell Script
-              run: 
-                chmod +x shell-script.sh
-                ./shell-script.sh
+        - name: Executing Shell Script
+          run: 
+            chmod +x shell-script.sh
+            ./shell-script.sh
+        - name: sleep for 30 seconds
+          run: sleep 30    
+  test_job:
+          runs-on: ubuntu-latest
+          steps:
+              - name: sleep for 10 seconds
+                run: sleep 10
+
+              - name: Test file exists
+                run: grep -i README.md
+  deploy_job:
+          runs-on: ubuntu-latest
+          steps:
+              - name: Read file
+                run: cat README.md
+
+              - name: Deploy
+                run: echo deploying ...                             
