@@ -6,32 +6,37 @@ jobs:
   build_job:
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout
-          uses: actions/checkout@v4.2.1
-          # with: ${{}}
+    - name: Checkout
+      uses: actions/checkout@v4.2.1
+      # with: ${{}}
 
-        - name: List files
-          run: ls 
+    - name: List files
+      run: ls 
 
-        - name: Executing Shell Script
-          run: 
-            chmod +x shell-script.sh
-            ./shell-script.sh
-        - name: sleep for 30 seconds
-          run: sleep 30    
-  test_job:
-          runs-on: ubuntu-latest
-          steps:
-              - name: sleep for 10 seconds
-                run: sleep 10
+    - name: Executing Shell Script
+      run: 
+        chmod +x shell-script.sh
+        ./shell-script.sh
 
-              - name: Test file exists
-                run: grep -i README.md
+    - name: sleep for 30 seconds
+      run: sleep 30  
+
+  test_job: 
+    needs: build_job
+    runs-on: ubuntu-latest
+    steps:
+    - name: sleep for 10 seconds
+      run: sleep 10
+
+    - name: Test file exists
+      run: grep -i README.md
+
   deploy_job:
-          runs-on: ubuntu-latest
-          steps:
-              - name: Read file
-                run: cat README.md
+    needs: [test_job]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Read file
+      run: cat README.md
 
-              - name: Deploy
-                run: echo deploying ...                             
+    - name: Deploy
+      run: echo deploying ...                             
