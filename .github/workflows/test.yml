@@ -9,12 +9,11 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4.2.1
               # with: ${{}}
-            
-            - name: Welcome message
-              run: echo "Hello World"
 
             - name: List files
-              run: ls
+              run: ls 
 
-            - name: Read file
-              run: cat README.md
+            - name: Executing Shell Script
+              run: 
+                chmod +x shell-script.sh
+                ./shell-script.sh
