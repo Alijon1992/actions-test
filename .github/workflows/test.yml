@@ -25,17 +25,20 @@ jobs:
     needs: build_job
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v4.2.1
+
     - name: sleep for 10 seconds
       run: sleep 10
 
     - name: List files in root directory
       run: ls -la
 
-    # - name: Test file exists
-    #   run: test -f .github/workflows/README.md
+    - name: Test file exists
+      run: test -f README.md
 
-    # - name: Test keyword exists
-    #   run: grep -i "test" .github/workflows/README.md
+    - name: Test keyword exists
+      run: grep -i "test" README.md
 
   deploy_job:
     needs: [test_job]
