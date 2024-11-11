@@ -29,7 +29,7 @@ jobs:
       run: sleep 10
 
     - name: Test file exists
-      run: grep -i README.md
+      run: grep -i "test" README.md
 
   deploy_job:
     needs: [test_job]
